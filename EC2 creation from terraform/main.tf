@@ -15,15 +15,6 @@ provider "aws" {
   secret_key = "${var.secret_key}"
 }
 
-# 1. Create vpc
-#2. Create Internet Gateway
-#3. Create custom route table
-#4. Create a subnet
-#5. Associate subnet with route table
-#6. Create Security group to allow port 22,80,443
-#7. Create a network interface with an ip in the subnet that was created in step 4
-#8. Assign an elastic ip to the network interface created in step 7
-#9. Create server and install/enable apache2
 
 #Create VPC
 resource "aws_vpc" "main-vpc"{
@@ -129,7 +120,7 @@ resource "aws_security_group" "sgroup" {
 #7. Create a network interface with an ip in the subnet that was created in step 4
 resource "aws_network_interface" "ni" {
   subnet_id       = aws_subnet.main-subnet.id
-  private_ips     = ["10.0.1.50"]
+  private_ips     = ["10.0.1.10"]
   security_groups = [aws_security_group.sgroup.id]
 }
 
@@ -138,7 +129,7 @@ resource "aws_network_interface" "ni" {
 resource "aws_eip" "one" {
   vpc                       = true
   network_interface         = aws_network_interface.ni.id
-  associate_with_private_ip = "10.0.1.50"
+  associate_with_private_ip = "10.0.1.10"
   depends_on                = [aws_internet_gateway.main-gateway]
 
 }
@@ -168,6 +159,6 @@ resource "aws_instance" "instance_server" {
 
   tags = {
     Name = "Amazon_Linux2"
-	  Owner = "${var.Owner}"
+    Owner = "${var.Owner}"
   }
 }
