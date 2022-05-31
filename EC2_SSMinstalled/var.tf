@@ -1,11 +1,11 @@
 variable "access_key" {
     #description = "Enter AWS access key"
-    default = "AKIA52T7UHMKW6BK7BHC"
+    default = ""
 }
 
 variable "secret_key" {
     #description = "Enter Secret Key"
-    default = "7lMqwhV3gcYS7XvlEd0HANlkafrnjjOvuumxaEVe"
+    default = ""
 }
 
 variable "role_name" {
