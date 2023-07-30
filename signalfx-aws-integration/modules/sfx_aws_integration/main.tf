@@ -16,8 +16,6 @@ resource "null_resource" "delay" {
   provisioner "local-exec" {
     command     = "sleep 20"
     interpreter = ["/bin/bash", "-c"]
-    #command     = "Start-Sleep 20"
-    #interpreter = ["PowerShell", "-Command"]
  }
   triggers = {
     "after" = var.role_arn
