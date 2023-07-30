@@ -18,14 +18,12 @@ data "aws_iam_policy_document" "signalfx_assume_policy" {
 
     principals {
       type        = "AWS"
-#      identifiers = [signalfx_aws_external_integration.signalfx_externalId.signalfx_aws_account]
       identifiers = ["${var.signalfx_aws_account}"]
     }
 
     condition {
       test     = "StringEquals"
       variable = "sts:ExternalId"
-#      values   = [signalfx_aws_external_integration.signalfx_externalId.external_id]
       values   = ["${var.external_id}"]
     }
   }
